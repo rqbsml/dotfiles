@@ -18,16 +18,17 @@ DIFF_TOTAL=$((TOTAL - PREV_TOTAL))
 DIFF_IDLE=$((IDLE - PREV_IDLE))
 USAGE=$((100 * (DIFF_TOTAL - DIFF_IDLE) / DIFF_TOTAL))
 
-# 2. Get CPU Temp (MSI/Intel standard)
-# Usually thermal_zone2 or hwmon; we'll find the x86_pkg_temp
-TEMP_PATH=$(find /sys/class/thermal/thermal_zone*/ -type d)
-for zone in $TEMP_PATH; do
-	if [ -f "$zone/type" ] && grep -qE "x86_pkg_temp|package" "$zone/type"; then
-		TEMP=$(cat "$zone/temp")
-		TEMP=$((TEMP / 1000))
-		break
-	fi
-done
+# # 2. Get CPU Temp (MSI/Intel standard)
+# # Usually thermal_zone2 or hwmon; we'll find the x86_pkg_temp
+# TEMP_PATH=$(find /sys/class/thermal/thermal_zone*/ -type d)
+# for zone in $TEMP_PATH; do
+# 	if [ -f "$zone/type" ] && grep -qE "x86_pkg_temp|package" "$zone/type"; then
+# 		TEMP=$(cat "$zone/temp")
+# 		TEMP=$((TEMP / 1000))
+# 		break
+# 	fi
+# done
+TEMP=$(cat /sys/devices/platform/msi-ec/cpu/realtime_temperature)
 
 # Fallback if no thermal zone found
 TEMP=${TEMP:-0}

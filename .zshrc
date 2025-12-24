@@ -1,140 +1,76 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+# --- BASIC SETTINGS ---
+export LANG=en_US.UTF-8
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
+setopt APPEND_HISTORY
+bindkey -e # Use emacs keybindings
 
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# # --- PROMPT ---
+# # A very simple, fast prompt. 
+# # (You can replace this with 'Starship' later for a better Gruvbox look)
+# PROMPT='%F{214}%n%f@%F{142}%m%f %F{109}%~%f %# '
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="half-life"
-ZSH_THEME="gruvbox"
-SOLARIZED_THEME="dark"
+# --- 1. COMPLETION SYSTEM (The "Brain") ---
+autoload -Uz compinit
+# Cache completions for speed (makes startup instant)
+typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || echo 0)
+if [ $(date +'%j') != $updated_at ]; then
+  compinit
+else
+  compinit -C
+fi
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# OMZ-style Tab Menu (Arrow key navigation)
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # Case-insensitive
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # Colors in menu
+zstyle ':completion:*:descriptions' format '[%d]' # Grouping by type
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# --- 2. SHELL OPTIONS (The "OMZ logic") ---
+setopt AUTO_CD              # Type 'dotfiles' to enter
+setopt CORRECT              # "Did you mean...?" for typos
+setopt AUTO_LIST            # List choices on ambiguous completion
+setopt AUTO_MENU            # Show menu after second tab press
+setopt ALWAYS_TO_END        # Move cursor to end of word after completion
+setopt SHARE_HISTORY        # Share history between all open terminals
+setopt APPEND_HISTORY       # Don't overwrite history file
+setopt HIST_IGNORE_ALL_DUPS # Don't record same command twice
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# --- 3. ALIASES (The "Shortcuts") ---
+alias la='ls -lAh --color=auto'
+alias l='ls -lh --color=auto'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias grep='grep --color=auto'
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# --- 4. PLUGINS (Arch System Paths) ---
+# Highlighting MUST be last
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+# --- 5. PLUGIN TWEAKS ---
+# Use Gruvbox Gray for the "ghost text" suggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
-#
-#
-# # --- KEYBINDINGS FIX ---
-# Fix Ctrl + Backspace
-# bindkey '^H' backward-kill-word
-#
-# # Fix Ctrl + Delete
-# bindkey "^[[3;5~" kill-word
-#
-# # Fix Home / End keys (if they aren't working)
-# bindkey "^[[H" beginning-of-line
-# bindkey "^[[F" end-of-line
-#
-# # Fix Ctrl + Left/Right Arrow to skip words
-# bindkey "^[[1;5C" forward-word
-# bindkey "^[[1;5D" backward-word
-#
-# # Make Backspace work if it ever breaks
-# bindkey "^?" backward-delete-char
-
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
-
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
+# --- ALIASES ---
 alias zshconfig="nvim ~/.zshrc"
-alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias cls="clear"
 alias code="codium"
-
-#monitor alias
 alias monitor-only='hyprctl keyword monitor eDP-1, disable'
 alias laptop-only='hyprctl keyword monitor eDP-1, preferred, auto, 1 && hyprctl keyword monitor HDMI-A-1, disable'
-
-
 alias vplay='mpv --hwdec=no --ytdl-format="bestvideo[height<=2160]+bestaudio/best" --demuxer-max-bytes=500M --demuxer-readahead-secs=30 --force-window=immediate --no-border'
 
+# --- NVM LAZY LOAD ---
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && {
+    nvm() { unset -f nvm node npm npx; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm "$@"; }
+    node() { unset -f nvm node npm npx; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; node "$@"; }
+    npm() { unset -f nvm node npm npx; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; npm "$@"; }
+    npx() { unset -f nvm node npm npx; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; npx "$@"; }
+}
 
+# --- FASTFETCH ---
 fastfetch
+
+eval "$(starship init zsh)"

@@ -1,0 +1,38 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+format = """$username $directory [on](bold #928374) $git_branch$git_status$battery$character"""
+
+[username]
+style_user = "bold #d65d0e" # Gruvbox Orange
+format = "[$user]($style)"
+disabled = false
+show_always = true # This ensures it shows even if you aren't on SSH
+
+[directory]
+style = "bold #458588" # Gruvbox Blue
+truncation_length = 3
+truncate_to_repo = true
+format = " [$path]($style)[$read_only]($read_only_style) "
+
+[git_status]
+style = "bold #fb4934"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+# Keep your counts as we set them before
+untracked = "[?$count](bold #d3869b)"
+modified = "[!$count](bold #fabd2f)"
+staged = "[+$count](bold #b8bb26)"
+deleted = "[✘$count](bold #fb4934)"
+
+[character]
+success_symbol = "[➜](bold #fabd2f)"
+error_symbol = "[➜](bold #fb4934)"
+
+# Hide hostname entirely
+[hostname]
+disabled = true
+

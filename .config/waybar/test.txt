@@ -1,4 +1,0 @@
-card0                    10de:28a0                         pci:vendor=10DE,device=28A0,card=0
-└─renderD129            
-card1                    Intel Alderlake_p (Gen12)         pci:vendor=8086,device=46A3,card=0
-└─renderD128            

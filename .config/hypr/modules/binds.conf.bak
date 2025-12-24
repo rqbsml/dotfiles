@@ -57,8 +57,6 @@ bind = ALT_R, period, exec, rofi -show emoji
 
 # Waybar
 bind = ALT_R, W, exec, pkill waybar || waybar && waybar
-bind = ALT_R, P, exec, ~/.config/waybar/scripts/network-switch.sh
-
 # Move focus with mainMod + arrow keys
 bind = $mainMod, left, movefocus, l
 bind = $mainMod, right, movefocus, r

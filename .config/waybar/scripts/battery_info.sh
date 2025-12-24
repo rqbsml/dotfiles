@@ -6,31 +6,17 @@ BAT_PATH=$(find /sys/class/power_supply/ -name "BAT*" | head -n 1)
 CAPACITY=$(cat "$BAT_PATH/capacity" 2>/dev/null || echo "0")
 STATUS=$(cat "$BAT_PATH/status" 2>/dev/null || echo "Unknown")
 
-# Select Icon based on capacity
-if [ "$CAPACITY" -le 10 ]; then
-	ICON=""
-elif [ "$CAPACITY" -le 30 ]; then
-	ICON=""
-elif [ "$CAPACITY" -le 50 ]; then
-	ICON=""
-elif [ "$CAPACITY" -le 80 ]; then
-	ICON=""
-else ICON=""; fi
-
 # Change icon if charging
 if [ "$STATUS" = "Charging" ]; then
-	ICON=""
 	CLASS="charging"
 elif [ "$STATUS" = "Full" ] || [ "$STATUS" = "Not charging" ]; then
-	ICON=""
 	CLASS="plugged"
 else
-	# Logic for warning/critical classes
 	if [ "$CAPACITY" -le 15 ]; then
 		CLASS="critical"
 	elif [ "$CAPACITY" -le 30 ]; then
 		CLASS="warning"
-	else CLASS="normal"; fi
+	else CLASS="default"; fi
 fi
 
 # echo "{\"text\": \"$CAPACITY\", \"tooltip\": \"Status: $STATUS\", \"class\": \"$CLASS\", \"alt\": \"$CLASS\"\"} 
