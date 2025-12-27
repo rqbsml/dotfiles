@@ -46,15 +46,15 @@
         "break",
         { "type": "os", "key": " ", "keyColor": "38;5;214" },
         { "type": "kernel", "key": " ", "keyColor": "38;5;214" },
-        // { "type": "wm", "key": " ", "keyColor": "38;5;214" },
+        { "type": "wm", "key": " ", "keyColor": "38;5;214" },
         { "type": "uptime", "key": " ", "keyColor": "38;5;214" },
         "break",
         { "type": "host", "key": "󰌢 ", "keyColor": "38;5;214" },       // Laptop Model
-        // { "type": "cpu", "key": " ", "keyColor": "38;5;214" },
-        // { "type": "gpu", "key": "󰢮 ", "keyColor": "38;5;214" },
+        { "type": "cpu", "key": " ", "keyColor": "38;5;214" },
+        { "type": "gpu", "key": "󰢮 ", "keyColor": "38;5;214" },
         { "type": "memory", "key": " ", "keyColor": "38;5;214" },
         { "type": "disk", "key": " ", "keyColor": "38;5;214" },
-        // { "type": "battery", "key": " ", "keyColor": "38;5;214" },    // Useful for laptops
+        { "type": "battery", "key": " ", "keyColor": "38;5;214" },    // Useful for laptops
         "break",
         {
             "type": "custom",

@@ -1,0 +1,114 @@
+
+#################################
+# Global / Default settings
+#################################
+
+# Font used in notifications
+font=JetBrainsMono Nerd Font 10
+
+# Maximum width of a notification (in pixels)
+width=420
+
+# Outer margin from screen edges
+margin=10
+
+# Padding inside notification
+padding=12
+
+# Rounded corners (Wayland only)
+border-radius=8
+
+# Border size
+border-size=2
+
+# Default border color
+border-color=#89b4fa
+
+# Background color
+background-color=#1e1e2e
+
+# Text color
+text-color=#cdd6f4
+
+# Notification stacking direction
+# top-right, top-left, bottom-right, bottom-left
+anchor=top-right
+
+#################################
+# Timeouts (in seconds)
+#################################
+
+# Default timeout
+default-timeout=6
+
+# Ignore timeout if hovered
+ignore-timeout=true
+
+#################################
+# Icons
+#################################
+
+# Enable icons if available
+icons=1
+
+# Max icon size
+max-icon-size=48
+
+#################################
+# Urgency-based rules
+#################################
+
+[urgency=low]
+border-color=#6c7086
+default-timeout=3
+
+[urgency=normal]
+border-color=#89b4fa
+default-timeout=6
+
+[urgency=critical]
+border-color=#f38ba8
+background-color=#181825
+text-color=#f38ba8
+default-timeout=0   
+ignore-timeout=false
+
+#################################
+# App-specific rules
+#################################
+
+# Volume / brightness spam (PipeWire, WirePlumber, etc.)
+[app-name=pipewire]
+default-timeout=2
+
+[app-name=wireplumber]
+default-timeout=2
+
+# NetworkManager notifications
+[app-name=nm-applet]
+default-timeout=4
+
+# Screenshots (grim/slurp)
+[app-name=grim]
+default-timeout=3
+
+# Bluetooth
+[app-name=blueman]
+default-timeout=4
+
+# Docker
+[app-name="docker"]
+default-timeout=4
+border-color=#a6e3a1
+
+[summary~="(Docker|docker|container|compose)"]
+default-timeout=5
+border-color=#74c7ec
+
+#################################
+# Grouping rules (VERY useful)
+#################################
+
+# Group notifications from same app together
+group-by=app-name
+

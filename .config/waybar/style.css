@@ -20,7 +20,10 @@
 #custom-gpu,
 #pulseaudio,
 #network,
-#custom-battery
+#custom-battery,
+#custom-docker,
+#custom-bluetooth
+#custom-touchpad
 {
     background: transparent;
     border: 1px solid #ebdbb2; /* Added 'solid' */
@@ -127,4 +130,16 @@ tooltip label {
     background: transparent;
     border: none; /* Border is handled by the group */
     padding: 0 10px 0 0;
+}
+
+#custom-docker.active {
+    color: #2496ed; /* Docker Blue */
+}
+
+#custom-touchpad.active {
+    color: #2496ed; /* Docker Blue */
+}
+
+#custom-bluetooth.active {
+    color: #0082fc; /* Bluetooth Blue */
 }

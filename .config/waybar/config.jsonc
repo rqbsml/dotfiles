@@ -13,6 +13,8 @@
         "network",
         "pulseaudio",
         "custom/battery",
+        "custom/docker",
+        "custom/bluetooth",
         "group/drawer"
     ],
 
@@ -37,7 +39,7 @@
         "exec": "~/.config/waybar/scripts/cpu_info.sh",
         "return-type": "json",
         "format": "{icon}: {text}",
-        "interval": 2,
+        "interval": 5,
         "format-icons": {
             "default": " " 
         }
@@ -46,8 +48,8 @@
     "custom/gpu": {
         "exec": "~/.config/waybar/scripts/gpu_info.sh",
         "return-type": "json",
-        "format": "{icon}: {percentage}% {text}",
-        "interval": 2,
+        "format": "{icon}: {text}",
+        "interval": 5,
         "format-icons": {
             "default": "󰚗 "
         }
@@ -57,7 +59,7 @@
         "exec": "~/.config/waybar/scripts/battery_info.sh",
         "return-type": "json",
         "format": "{icon}: {percentage}%",
-        "interval": 2,
+        "interval": 5,
         "format-icons": {
             "default": [" "," "," "," "," "],
             "charging":[" 󱐋"," 󱐋"," 󱐋"," 󱐋"," 󱐋"],
@@ -69,14 +71,14 @@
         "format-wifi": "{icon}: {essid}",
         "format-ethernet": "{icon}: {bandwidthTotalBytes}",
         "format-disconnected": "{icon}",
-        "tooltip-format": "{essid} via {gwaddr}",
+        "tooltip-format": "{essid}",
         "format-icons": {
             "wifi":["󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
             "ethernet": "󰈀 ",
             "disconnected": " ",
         },
         "max-length": 10,
-        "interval": 2,
+        "interval": 5,
         "on-click":"~/.config/waybar/scripts/network-manager.sh"
     },
 
@@ -102,7 +104,7 @@
             "default": ""
         }
     },
-     
+
     "group/drawer": {
         "orientation": "inherit",
         "drawer": {
@@ -149,4 +151,37 @@
             "hibernate": "systemctl hibernate",
         },
     },
+
+    "custom/docker": {
+        "format": "{} ", 
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/status_check.sh docker.service  ",
+        "interval": 2, // Lower interval makes the icon appear/disappear faster
+        "on-click": "zsh -c 'source ~/.zshrc && tog-docker'", 
+        "tooltip": true,
+        "hide-empty-text": true
+    },
+
+    "custom/bluetooth": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/status_check.sh bluetooth.service",
+        "interval": 5,
+        "on-click": "blue-on",
+        "on-click-right": "blue-off"
+    },
+
+    "custom/touchpad": {
+        "exec": "cat /dev/shm/touchpad_state",
+        "return-type": "",
+        "format": "{}",
+        "format-icons": {
+            "1": "󰟔", // Icon for enabled
+            "0": "󰟕"  // Icon for disabled
+        },
+        "interval": 1,
+        "on-click": "toggle-touchpad"
+    }
+
+
 }

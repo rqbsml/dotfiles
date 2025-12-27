@@ -17,7 +17,7 @@ NAME=$(echo "$NAME" | xargs | sed 's/ Laptop GPU//')
 
 # Tooltip: Values only (no labels) as requested
 # Format: Name \n MemoryUsed/Total \n CurrentClock/Max \n Power
-TOOLTIP="$NAME\n$MEM_U/$MEM_T MB\n$CLOCK/$CLOCK_MAX MHz\n$PWR W"
+TOOLTIP="$NAME\nMemory: $MEM_U/$MEM_T MB\nSpeed: $CLOCK/$CLOCK_MAX MHz\nPower: $PWR W"
 TEMP=$(cat /sys/devices/platform/msi-ec/gpu/realtime_temperature)
 # Output JSON
 # text: Temperature only

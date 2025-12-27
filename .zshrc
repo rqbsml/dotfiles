@@ -16,9 +16,9 @@ autoload -Uz compinit
 # Cache completions for speed (makes startup instant)
 typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || echo 0)
 if [ $(date +'%j') != $updated_at ]; then
-  compinit
+    compinit
 else
-  compinit -C
+    compinit -C
 fi
 
 # OMZ-style Tab Menu (Arrow key navigation)
@@ -58,8 +58,6 @@ alias zshconfig="nvim ~/.zshrc"
 alias cls="clear"
 alias code="codium"
 alias monitor-only='hyprctl keyword monitor eDP-1, disable'
-alias laptop-only='hyprctl keyword monitor eDP-1, preferred, auto, 1 && hyprctl keyword monitor HDMI-A-1, disable'
-alias vplay='mpv --hwdec=no --ytdl-format="bestvideo[height<=2160]+bestaudio/best" --demuxer-max-bytes=500M --demuxer-readahead-secs=30 --force-window=immediate --no-border'
 
 # --- NVM LAZY LOAD ---
 export NVM_DIR="$HOME/.nvm"
