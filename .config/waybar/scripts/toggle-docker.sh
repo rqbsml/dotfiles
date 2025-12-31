@@ -1,8 +1,22 @@
 #!/bin/bash
-if systemctl is-active --quiet docker.service; then
-    systemctl stop docker.service docker.socket
-    notify-send "Docker" "Service Stopped" -i docker
+
+SERVICE="docker"
+NAME="Docker"
+ICON="dialog-success"
+
+if systemctl is-active --quiet ${SERVICE}.service; then
+    # Try stopping Docker
+    if systemctl stop ${SERVICE}.service ${SERVICE}.socket; then
+        notify-send "${NAME}" "Service Stopped" -i dialog-information
+    else
+        notify-send "${NAME}" "Failed to stop service! Check permissions." -i dialog-error
+    fi
 else
-    systemctl start docker.socket docker.service
-    notify-send "Docker" "Service Started" -i docker
+    # Try starting Docker
+    if systemctl start ${SERVICE}.socket ${SERVICE}.service; then
+        notify-send "${NAME}" "Service Started" -i dialog-ok
+    else
+        notify-send "${NAME}" "Failed to start service! Check permissions." -i dialog-error
+    fi
 fi
+

@@ -5,6 +5,7 @@
     font-family: "JetBrains Mono Nerd Font", monospace;
     font-size: 13px;
     font-weight: 500; /* Try 500 or 600 */
+    background: transparent;
 }
 
 /* window#waybar { */
