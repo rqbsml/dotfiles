@@ -10,6 +10,7 @@ STATUS=$(cat "$BAT_PATH/status" 2>/dev/null || echo "Unknown")
 if [ "$STATUS" = "Charging" ]; then
 	CLASS="charging"
 elif [ "$STATUS" = "Full" ] || [ "$STATUS" = "Not charging" ]; then
+	STATUS="Not Charging"
 	CLASS="plugged"
 else
 	if [ "$CAPACITY" -le 15 ]; then
