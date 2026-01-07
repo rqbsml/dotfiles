@@ -17,14 +17,15 @@ mainbox {
 
 listview {
     background-color: transparent;
-    columns:          3;
-    row:              2;
-    lines:            1;
+    columns:          3;    /* Keep this at 3 */
+    lines:            2;    /* Change this to 2 (total 6 items) */
     spacing:          20px;
     cycle:            true;
     dynamic:          true;
-    layout:           vertical;
-    padding:          30px; /* Space around the 4 buttons */
+    layout:           vertical; /* Keep as vertical for standard grid behavior */
+    reverse:          false;
+    fixed-height:     true;
+    padding:          30px; 
 }
 
 element {
@@ -32,19 +33,20 @@ element {
     text-color:       @fg;
     orientation:      vertical; 
     border-radius:    20px;
-    padding:          35px 0px; 
+    padding:          20px 0px; 
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    font:            "JetBrainsMono Nerd Font Propo 32"; 
+    horizontal-align: 0.5;
+    vertical-align:   0.5;
+    markup:           true; 
 }
 
 element selected {
     background-color: @blue; /* Use your 70% blue suffix here if you want */
     text-color:       @bg;
     border:           0px;
-}
-
-element-text {
-    background-color: transparent;
-    text-color:       inherit;
-    font:            "JetBrainsMono Nerd Font 32"; /* Big Icons */
-    horizontal-align: 0.5;
-    vertical-align:   0.5;
 }

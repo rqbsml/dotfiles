@@ -56,7 +56,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 # --- ALIASES ---
 alias zshconfig="nvim ~/.zshrc"
 alias cls="clear"
-alias code="codium"
 alias monitor-only='hyprctl keyword monitor eDP-1, disable'
 
 # --- NVM LAZY LOAD ---

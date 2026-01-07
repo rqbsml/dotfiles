@@ -1,0 +1,38 @@
+.control-center .notification-row { background-color: unset; }
+
+.control-center .notification-row .notification-background .notification .notification-content,
+.floating-notifications .notification-row .notification-background .notification .notification-content {
+  border: unset;
+  border-radius: 1.159rem;
+  background-color: var(--bg-card);
+  padding: 0.818rem;
+}
+
+/* Priority Colors */
+.notification.low label, .notification.normal label { color: var(--text-secondary); }
+.notification.low .body, .notification.normal .body { color: var(--text-muted); }
+
+.notification.critical .notification-content { background-color: var(--bg-critical); }
+.notification.critical label { color: var(--text-critical); }
+
+/* Typography */
+.notification-content .summary {
+  font-family: 'Gabarito', 'Lexend', sans-serif;
+  font-size: 0.9909rem;
+  font-weight: 500;
+}
+
+.notification-content .time {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.8291rem;
+}
+
+/* Close Button */
+.close-button {
+  background-color: unset;
+  border-radius: 100%;
+  border: none;
+  min-height: 20px;
+  min-width: 20px;
+}
+.close-button:hover { background-color: rgba(255, 255, 255, 0.15); }

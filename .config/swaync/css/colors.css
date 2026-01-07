@@ -1,0 +1,25 @@
+:root {
+  /* Backgrounds */
+  --bg-main: #14141B;
+  --bg-card: #1D1D22;
+  --bg-widget: rgba(28, 28, 34, 0.35);
+  --bg-critical: #ffb4a9;
+  
+  /* Accents */
+  --accent-orange: #ff9f34; /* OnePlus McLaren Edition */
+  --accent-hover: rgba(128, 128, 128, 0.3);
+  --accent-active: rgba(128, 128, 128, 0.7);
+  
+  /* Text & Icons */
+  --text-primary: #e4e1e6;
+  --text-secondary: #c7c5d0;
+  --text-muted: #92919a;
+  --text-dark: #14141B;
+  --text-critical: #680003;
+  --icon-purple: #e2e0f9;
+  
+  /* Borders & Shadows */
+  --border-light: rgba(164, 162, 167, 0.19);
+  --border-dark: rgba(128, 127, 132, 0.145);
+  --shadow-main: rgba(0, 0, 0, 0.45);
+}

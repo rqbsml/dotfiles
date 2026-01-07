@@ -3,7 +3,7 @@ configuration {
     show-icons: true;
     icon-theme: "Papirus-Dark";
     drun-display-format: "{icon} {name}";
-    font: "JetBrainsMono Nerd Font 12";
+    font: "JetBrainsMono Nerd Font Propo 12";
 }
 
 

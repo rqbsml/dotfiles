@@ -1,0 +1,103 @@
+@import url("colors.css");
+
+* {
+  font-size: 14px;
+  font-family: "Noto Sans";
+  transition: 100ms;
+  box-shadow: unset;
+}
+
+/* Shared Slider/Trough Styles */
+.control-center trough {
+  border-radius: 9999px;
+  -gtk-outline-radius: 9999px;
+  min-width: 0.545rem;
+  background-color: transparent;
+}
+
+.control-center slider {
+  border-radius: 9999px;
+  -gtk-outline-radius: 9999px;
+  min-width: 0.273rem;
+  min-height: 2.045rem;
+  background-color: rgba(199, 197, 208, 0.31);
+}
+
+.control-center slider:hover {
+  background-color: rgba(199, 197, 208, 0.448);
+}
+
+.control-center slider:active {
+  background-color: #77767e;
+}
+
+.control-center {
+  border-radius: 1.705rem;
+  -gtk-outline-radius: 1.705rem;
+  border-top: 1px solid var(--border-light);
+  border-left: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+  box-shadow: 0px 2px 3px var(--shadow-main);
+  margin: 7px;
+  background-color: var(--bg-main);
+  padding: 1.023rem;
+}
+
+/* Title Widget */
+.widget-title { padding: 0.341rem; margin: unset; }
+.widget-title label {
+  font-family: 'Gabarito', 'Lexend', sans-serif;
+  font-size: 1.364rem;
+  color: var(--text-primary);
+  margin-left: 0.941rem;
+}
+.widget-title button {
+  border: unset;
+  background-color: unset;
+  border-radius: 1.159rem;
+  -gtk-outline-radius: 1.159rem;
+  padding: 0.141rem 0.141rem;
+  margin-right: 0.841rem;
+}
+.widget-title button:hover { background-color: var(--accent-hover); }
+
+/* Buttons Grid */
+.widget-buttons-grid {
+  border-radius: 1.159rem;
+  background-color: var(--bg-widget);
+  padding: unset;
+}
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  border: none;
+  background-color: unset;
+  border-radius: 9999px;
+  min-width: 5.522rem;
+  min-height: 2.927rem;
+}
+.widget-buttons-grid > flowbox > flowboxchild > button:checked {
+  background-color: var(--accent-orange);
+}
+.widget-buttons-grid > flowbox > flowboxchild > button:checked label {
+  color: var(--text-dark);
+}
+
+/* Volume Widget */
+.widget-volume {
+  background-color: var(--bg-widget);
+  padding: 8px; margin: 8px;
+  border-radius: 1.159rem;
+}
+.widget-volume trough slider {
+  background-color: var(--accent-orange);
+  border-radius: 100%;
+  min-height: 1.25rem;
+}
+
+/* MPRIS Widget */
+.widget-mpris {
+  background-color: var(--bg-widget);
+  padding: 8px; margin: 8px;
+  border-radius: 1.159rem;
+}
+.widget-mpris-title { font-weight: bold; font-size: 1.25rem; }
