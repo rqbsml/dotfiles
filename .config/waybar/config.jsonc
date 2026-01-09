@@ -5,20 +5,16 @@
   "width": 1870,
   "spacing": 2,
   "margin-top": 12,
-  "modules-left": [
-    "hyprland/workspaces",
-    "hyprland/window"
-  ],
-  "modules-center": [
-    "clock"
-  ],
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
   "modules-right": [
     "group/monitor-drawer",
     "network",
     "custom/docker",
     "pulseaudio",
     "custom/battery",
-    "group/tray-drawer"
+    "group/tray-drawer",
+    "custom/notification"
   ],
   "hyprland/workspaces": {
     "disable-scroll": true,
@@ -26,7 +22,7 @@
     "format-icons": {
       "urgent": "",
       "active": "",
-      "default": "",
+      "default": ""
     },
     "persistent-workspaces": {
       "*": 4
@@ -48,52 +44,39 @@
     "format-muted": "<span font='13'></span>",
     "format-icons": {
       "headphone": "",
-      "default": [
-        "",
-        "",
-        ""
-      ]
+      "default": ["", "", ""]
     },
     "on-click": "pavucontrol",
     "reverse-scrolling": true
   },
   "custom/battery": {
-    "exec": "~/.config/waybar/scripts/battery_info.sh",
+    "exec": "~/.config/rqbsml/scripts/battery_info.sh",
     "return-type": "json",
     "format": "<span font='13'>{icon}</span> {percentage}%",
     "interval": 5,
     "format-icons": {
-      "default": [
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "charging": [
-        "󱐋"
-      ],
+      "default": ["", "", "", "", ""],
+      "charging": ["󱐋"],
       "plugged": "󰚥"
     }
   },
   "network": {
-    "format-wifi": "<span font='13'>{icon}</span>",
-    "format-ethernet": "<span font='13'>{icon}</span>: {bandwidthTotalBytes}",
-    "format-disconnected": "<span font='13'>{icon}</span>",
-    "tooltip-format": "{essid}",
+    "interval": 2, // Set to 2 to see real-time bandwidth in tooltip
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰖪",
     "format-icons": {
-      "wifi": [
-        "",
-        "󰤢",
-        "󰤥",
-        "󰤨"
-      ],
-      "ethernet": "󰈀 ",
-      "disconnected": " ",
+      "wifi": ["󰤢", "󰤥", "󰤨"],
+      "ethernet": [""],
+      "disconnected": [""]
     },
-    "max-length": 10,
-    "interval": 5,
-    "on-click": "~/.config/waybar/scripts/network-manager.sh"
+    // Detailed tooltips
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "  {essid} ({signalStrength}%)\n {bandwidthDownBytes}   {bandwidthUpBytes}",
+    "tooltip-format-ethernet": "󰈀  {ifname}\n {bandwidthDownBytes}   {bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected ⚠",
+    "max-length": 50,
+    "on-click": "~/.config/rqbsml/scripts/network-manager.sh"
   },
   "tray": {
     "spacing": 10,
@@ -112,10 +95,7 @@
       "transition-duration": 500,
       "transition-left-to-right": false
     },
-    "modules": [
-      "custom/tray-icon",
-      "tray"
-    ]
+    "modules": ["custom/tray-icon", "tray"]
   },
   "custom/monitor-icon": {
     "format": "<span font='13'>{icon}</span>",
@@ -125,13 +105,13 @@
     }
   },
   "custom/cpu": {
-    "exec": "~/.config/waybar/scripts/cpu_info.sh",
+    "exec": "~/.config/rqbsml/scripts/cpu_info.sh",
     "return-type": "json",
     "format": "󰻠 {text}",
     "interval": 5
   },
   "custom/gpu": {
-    "exec": "~/.config/waybar/scripts/gpu_info.sh",
+    "exec": "~/.config/rqbsml/scripts/gpu_info.sh",
     "return-type": "json",
     "format": "󰾲 {text}",
     "interval": 5
@@ -142,23 +122,39 @@
       "transition-duration": 500,
       "transition-left-to-right": false
     },
-    "modules": [
-      "custom/monitor-icon",
-      "custom/gpu",
-      "custom/cpu"
-    ]
+    "modules": ["custom/monitor-icon", "custom/gpu", "custom/cpu"]
   },
   "custom/docker": {
     "format": "{}",
     "return-type": "json",
-    "exec": "~/.config/waybar/scripts/status_check.sh docker.service  ",
-    "interval": 2, // Lower interval makes the icon appear/disappear faster
+    "exec": "~/.config/rqbsml/scripts/status_check.sh docker.service  ",
+    "interval": 2,
     "hide-empty-text": true
   },
   "custom/bluetooth": {
     "format": "{}",
     "return-type": "json",
-    "exec": "~/.config/waybar/scripts/status_check.sh bluetooth.service",
-    "interval": 2,
+    "exec": "~/.config/rqbsml/scripts/status_check.sh bluetooth.service",
+    "interval": 2
   },
+  "custom/notification": {
+    "tooltip": true,
+    "format": "<span size='13pt'>{icon}</span>",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
 }

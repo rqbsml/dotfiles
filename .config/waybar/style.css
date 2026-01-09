@@ -27,7 +27,8 @@ window#waybar {
 #custom-tray-icon,
 #custom-cpu,
 #custom-gpu,
-#custom-docker {
+#custom-docker,
+#custom-notification {
     background: rgba(31, 35, 53, 0.85); 
     color: @foreground;
     padding: 2px 12px;
